@@ -14,12 +14,18 @@
 #   about_triangle_project_2.rb
 #
 def triangle(a, b, c)
+  [a,b,c].each {|el| raise TriangleError if el <= 0 }	
   if (a == b) && (b == c) 
   	return :equilateral
   elsif (a != b) && (b != c) && (a != c) 
   	return :scalene
   else 
-  	return :isosceles  
+  	triangle = [a,b,c].sort!
+  	if (triangle[0] + triangle[1]) > triangle[2]
+		return :isosceles   	 
+	else 
+		raise TriangleError
+	end
   end
 end
 
