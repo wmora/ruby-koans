@@ -3,9 +3,13 @@ require File.expand_path(File.dirname(__FILE__) + '/edgecase')
 # Implement a DiceSet Class here:
 #
 class DiceSet  
-   def roll times 
+   def roll times         
+    old_values = @values.clone if @values
     @values = []
-    times.times { @values << rand(1 + 6) }    
+    times.times { @values << 1 + rand(6) }    
+    if old_values == @values
+      roll times
+    end
    end   
 
    def values
